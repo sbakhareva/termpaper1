@@ -1,17 +1,18 @@
 import java.util.Objects;
 
 public class Employee {
+    private int id;
+    private static int idCounter;
     private final String name;
     private int department;
     private int salary;
-    private static int idCounter = 0;
-    private int id;
 
     public Employee(String name, int salary, int department) {
+        this.id = ++idCounter;
         this.name = name;
         this.salary = salary;
         this.department = department;
-        this.id = idCounter++;
+
     }
 
     @Override
@@ -31,22 +32,20 @@ public class Employee {
         return this.salary;
     }
 
+    public void setSalary(int salary) {
+        if (salary <= 0) {
+            throw new IllegalArgumentException("Найдется работа получше");
+        } else this.salary = salary;
+    }
+
     public int getDepartment() {
         return this.department;
     }
 
     public void setDepartment(int department) {
-        this.department = department;
         if (department < 1 || department > 5) {
             throw new IllegalArgumentException("Такого отдела не существует");
-        }
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-        if (salary <= 0) {
-            throw new IllegalArgumentException("Найдется работа получше");
-        }
+        } else this.department = department;
     }
 
     @Override
